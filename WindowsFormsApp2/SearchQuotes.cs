@@ -8,13 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp2
+namespace MegaDesk
 {
-    public partial class Form1 : Form
+    public partial class SearchQuotes : Form
     {
-        public Form1()
+        public SearchQuotes()
         {
             InitializeComponent();
+        }
+
+        private void viewBack_Click(object sender, EventArgs e)
+        {
+            var mainMenu = (MainMenu)Tag;
+            mainMenu.Show();
+            Close();
         }
     }
 }
