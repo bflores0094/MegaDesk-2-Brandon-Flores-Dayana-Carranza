@@ -18,14 +18,15 @@ namespace MegaDesk
             veneer
         };
 
+        
         public string width { get; set; }
         public string height { get; set; }
-        public int material { get; set; }
+        public string material { get; set; }
         public int drawer { get; set; }
 
-        materialState mat = materialState.laminate;
+        
 
-        public Desk CreateDesk()
+        public Desk constructor()
         {
             this.width = width;
             this.height = height;

@@ -9,20 +9,19 @@ namespace MegaDesk
 {
     class DeskQuote
     {
-        
-        public int cost { get; set; }
-        public string name { get; set; }
-        public int date { get; set; }
-        public int shipping { get; set; }
 
-        Desk testDesk = new Desk().CreateDesk();
-        
+        public Desk Desk { get; set; }
+        public int Cost { get; set; }
+        public string Name { get; set; }
+        public DateTime Date { get; set; }
+        public decimal Shipping { get; set; }
 
-        public int GetQuote()
+
+        public int GetQuote(Desk desk)
         {
             int size = 30 * 30;
             int materialCost = 200;
-            int drawerCost = testDesk.drawer * 50;
+            int drawerCost = desk.drawer * 50;
             int shippingCost = 60;
             
             int quote = 200 + size + materialCost + drawerCost + shippingCost;
