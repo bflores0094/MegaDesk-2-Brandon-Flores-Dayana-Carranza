@@ -15,6 +15,7 @@ namespace MegaDesk
         public DateTime Date { get; set; }
         public decimal Shipping { get; set; }
         const decimal BASE_PRICE = 200;
+        public decimal materialInt;
 
         public DeskQuote(Desk Desk, string Name, decimal shippingNum)
         {
@@ -25,6 +26,7 @@ namespace MegaDesk
             this.Shipping = CalcShipping(shippingNum, size);
             decimal materialCost = GetMatCost(Desk.materialNum);
             this.Cost = GetQuote(size, this.Shipping, materialCost);
+            materialInt = Desk.materialNum;
 
         }
 

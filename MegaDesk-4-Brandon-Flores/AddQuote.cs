@@ -97,8 +97,8 @@ namespace MegaDesk
 
                     DeskQuote newQuote = new DeskQuote(newDesk, custName, shippingNum);
                     writer = new StreamWriter("quotes.txt", true);
-                    writer.Write(newQuote.Date.ToString("MM dd yyyy") + ", " +
-                        newQuote.Name + ", " + newQuote.Cost + "\n");
+                    writer.Write(newQuote.Date.ToString("MM/dd/yyyy") + ", " +
+                        newQuote.Name + ", " + newQuote.Cost + ", " + strMaterial + "\n");
                     writer.Close();
 
                     label5.Text = "Table quote created!";
