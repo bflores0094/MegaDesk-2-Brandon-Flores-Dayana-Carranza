@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MegaDesk
 {
     
-    class Desk
+    public class Desk
     {
-        enum materialState
+
+        public enum MaterialState
         {
             oak,
             laminate,
@@ -17,23 +19,21 @@ namespace MegaDesk
             rosewood,
             veneer
         };
+        public decimal widthInput;
+        public decimal heightInput;
+        public decimal drawerInput;
+        public decimal materialNum;
 
-        
-        public string width { get; set; }
-        public string height { get; set; }
-        public string material { get; set; }
-        public int drawer { get; set; }
 
-        
-
-        public Desk constructor()
+        public Desk(decimal widthInput, decimal heightInput, decimal drawerInput, decimal materialNum)
         {
-            this.width = width;
-            this.height = height;
-            this.material = material;
-            this.drawer = drawer;
-            return this;
+            this.widthInput = widthInput;
+            this.heightInput = heightInput;
+            this.drawerInput = drawerInput;
+            this.materialNum = materialNum;
+
         }
+
 
     }
 }

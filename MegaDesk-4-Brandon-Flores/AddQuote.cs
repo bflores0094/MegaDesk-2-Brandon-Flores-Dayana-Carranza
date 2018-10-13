@@ -7,15 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 
 namespace MegaDesk
 {
     public partial class AddQuote : Form
     {
+       
         public AddQuote()
         {
             InitializeComponent();
+
+            var materials = new List<Desk.MaterialState>();
+            materials = Enum.GetValues(typeof(Desk.MaterialState)).Cast<Desk.MaterialState>().ToList();
+            MaterialInput.DataSource = materials;
         }
 
         private void Back_Click(object sender, EventArgs e)
@@ -27,31 +33,91 @@ namespace MegaDesk
 
         private void Add_Click(object sender, EventArgs e)
         {
-            Desk newDesk = new Desk();
-            newDesk.width = WidthInput.Text;
-            newDesk.height = HeightInput.Text;
-            newDesk.drawer = 2;
-            newDesk.material = MaterialInput.Text;
-            int value;
+           
 
-            if (int.TryParse(newDesk.width, out value) && int.TryParse(newDesk.height, out value))
+            string strMaterial = MaterialInput.Text;
+            decimal widthNum = WidthInput.Value;
+            decimal heightNum = HeightInput.Value;
+            decimal drawerNum = DrawerInput.Value;
+            decimal shippingNum = Convert.ToDecimal(ShippingInput.Text);
+            string custName = NameInput.Text;
+            decimal materialNum;
+            StreamWriter writer;
+
+
+
+            if (strMaterial == "oak")
             {
-                int convertWidth = System.Convert.ToInt32(newDesk.width);
-                int convertHeight = System.Convert.ToInt32(newDesk.height);
+                materialNum = 1;
 
-                DeskQuote newQuote = new DeskQuote();
             }
-            else if (!int.TryParse(newDesk.width, out value))
+            else if (strMaterial == "laminate")
             {
-                ValError.Text = "Width must be a number";
+
+                materialNum = 2;
+
+            }
+            else if (strMaterial == "pine")
+            {
+
+                materialNum = 3;
+
+            }
+            else if (strMaterial == "rosewood")
+            {
+
+                materialNum = 4;
+
+            }
+            else if (strMaterial == "veneer")
+            {
+
+                materialNum = 5;
+
             }
             else
             {
-                ValError.Text = "Height must be a number";
+
+                materialNum = 1;
 
             }
 
-            
+            if (custName == "" || custName.All(char.IsDigit))
+            {
+                label6.Text = "Please enter a valid name";
+            }
+            else
+            {
+
+                try
+                {
+
+
+                    Desk newDesk = new Desk(widthNum, heightNum, drawerNum, materialNum);
+
+                    DeskQuote newQuote = new DeskQuote(newDesk, custName, shippingNum);
+                    writer = new StreamWriter("quotes.txt", true);
+                    writer.Write(newQuote.Date.ToString("MM dd yyyy") + ", " +
+                        newQuote.Name + ", " + newQuote.Cost + "\n");
+                    writer.Close();
+
+                    label5.Text = "Table quote created!";
+                    label6.Text = "";
+
+
+
+                }
+                catch
+                {
+                    label5.Text = "Table quote could not be made";
+                }
+
+
+            }
+ 
+
+
+
         }
     }
 

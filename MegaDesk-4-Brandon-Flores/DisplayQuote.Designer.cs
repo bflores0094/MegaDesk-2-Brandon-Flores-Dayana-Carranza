@@ -64,6 +64,7 @@
             this.finalQuote.Size = new System.Drawing.Size(84, 33);
             this.finalQuote.TabIndex = 3;
             this.finalQuote.Text = "$0.00";
+            this.finalQuote.Click += new System.EventHandler(this.finalQuote_Click);
             // 
             // DisplayQuote
             // 

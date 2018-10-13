@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Back = new System.Windows.Forms.Button();
             this.Add = new System.Windows.Forms.Button();
             this.QuoteLabel = new System.Windows.Forms.Label();
@@ -42,11 +43,18 @@
             this.NameInput = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.MaterialInput = new System.Windows.Forms.ComboBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.DrawerInput = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
+            this.ShippingInput = new System.Windows.Forms.ComboBox();
+            this.ShippingLabel = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.materialStateBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.WidthInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HeightInput)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrawerInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.materialStateBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // Back
@@ -189,7 +197,7 @@
             // NameInput
             // 
             this.NameInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NameInput.Location = new System.Drawing.Point(339, 88);
+            this.NameInput.Location = new System.Drawing.Point(309, 88);
             this.NameInput.MaxLength = 50;
             this.NameInput.Name = "NameInput";
             this.NameInput.Size = new System.Drawing.Size(240, 30);
@@ -209,32 +217,26 @@
             // 
             this.MaterialInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaterialInput.FormattingEnabled = true;
-            this.MaterialInput.Items.AddRange(new object[] {
-            "oak",
-            "laminate",
-            "pine",
-            "rosewood",
-            "veneer"});
             this.MaterialInput.Location = new System.Drawing.Point(585, 173);
             this.MaterialInput.Name = "MaterialInput";
             this.MaterialInput.Size = new System.Drawing.Size(121, 28);
             this.MaterialInput.TabIndex = 17;
             this.MaterialInput.Text = "oak";
             // 
-            // numericUpDown1
+            // DrawerInput
             // 
-            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown1.Location = new System.Drawing.Point(585, 220);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.DrawerInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DrawerInput.Location = new System.Drawing.Point(585, 220);
+            this.DrawerInput.Maximum = new decimal(new int[] {
             7,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 26);
-            this.numericUpDown1.TabIndex = 19;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            7,
+            this.DrawerInput.Name = "DrawerInput";
+            this.DrawerInput.Size = new System.Drawing.Size(120, 26);
+            this.DrawerInput.TabIndex = 19;
+            this.DrawerInput.Value = new decimal(new int[] {
+            1,
             0,
             0,
             0});
@@ -249,12 +251,79 @@
             this.label3.TabIndex = 18;
             this.label3.Text = "Drawers:";
             // 
+            // ShippingInput
+            // 
+            this.ShippingInput.AutoCompleteCustomSource.AddRange(new string[] {
+            "3",
+            "5 ",
+            "7"});
+            this.ShippingInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ShippingInput.FormattingEnabled = true;
+            this.ShippingInput.Items.AddRange(new object[] {
+            "3",
+            "5",
+            "7"});
+            this.ShippingInput.Location = new System.Drawing.Point(584, 264);
+            this.ShippingInput.Name = "ShippingInput";
+            this.ShippingInput.Size = new System.Drawing.Size(33, 28);
+            this.ShippingInput.TabIndex = 21;
+            this.ShippingInput.Text = "3";
+            // 
+            // ShippingLabel
+            // 
+            this.ShippingLabel.AutoSize = true;
+            this.ShippingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ShippingLabel.Location = new System.Drawing.Point(460, 260);
+            this.ShippingLabel.Name = "ShippingLabel";
+            this.ShippingLabel.Size = new System.Drawing.Size(127, 31);
+            this.ShippingLabel.TabIndex = 20;
+            this.ShippingLabel.Text = "Shipping:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(623, 270);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(40, 17);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "Days";
+            // 
+            // materialStateBindingSource
+            // 
+            this.materialStateBindingSource.DataSource = typeof(MegaDesk.Desk.MaterialState);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Green;
+            this.label5.Location = new System.Drawing.Point(333, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(0, 20);
+            this.label5.TabIndex = 24;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(333, 121);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(0, 17);
+            this.label6.TabIndex = 25;
+            // 
             // AddQuote
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.ShippingInput);
+            this.Controls.Add(this.ShippingLabel);
+            this.Controls.Add(this.DrawerInput);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.MaterialInput);
             this.Controls.Add(this.label1);
@@ -274,7 +343,8 @@
             this.Text = "AddQuote";
             ((System.ComponentModel.ISupportInitialize)(this.WidthInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.HeightInput)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrawerInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.materialStateBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -296,7 +366,13 @@
         private System.Windows.Forms.TextBox NameInput;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox MaterialInput;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown DrawerInput;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox ShippingInput;
+        private System.Windows.Forms.Label ShippingLabel;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.BindingSource materialStateBindingSource;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }

@@ -15,6 +15,7 @@ namespace MegaDesk
         public DisplayQuote()
         {
             InitializeComponent();
+  
         }
 
         private void viewBack_Click(object sender, EventArgs e)
@@ -22,6 +23,11 @@ namespace MegaDesk
             var mainMenu = (MainMenu)Tag;
             mainMenu.Show();
             Close();
+        }
+
+        private void finalQuote_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
