@@ -109,7 +109,9 @@ namespace MegaDesk
                 }
                 catch
                 {
+                    label5.ForeColor = Color.Red;
                     label5.Text = "Table quote could not be made";
+
                 }
 
 
