@@ -18,6 +18,13 @@ namespace MegaDesk
         const decimal BASE_PRICE = 200;
         public decimal materialInt;
 
+        
+        List<decimal> shipList = new List<decimal>();
+        int[,] shippingArray = new int[3, 3];
+
+
+
+
         public DeskQuote(Desk Desk, string Name, decimal shippingNum)
         {
             this.Desk = Desk;
@@ -32,21 +39,16 @@ namespace MegaDesk
         
         }
 
-        private int[,] GetRushOrder()
+        public int[,] GetRushOrder()
 
         {
-
-            int[,] shippingArray = new int[3, 3];
+            
 
             try
 
             {
-
                 StreamReader reader = new StreamReader("rushOrderPrices.txt");
-
-                reader.Close();
-
-
+                
                 while (reader.EndOfStream == false)
                 {
 
@@ -61,23 +63,18 @@ namespace MegaDesk
                             string line = reader.ReadLine();
 
                             shippingArray[row, col] = int.Parse(line);
-
                         }
                     }
                 }
+                reader.Close();
             }
-
-
-
             catch (FileNotFoundException)
 
             {
+                System.Windows.Forms.MessageBox.Show("File not found");
+
             }
-
-            
-
             return shippingArray;
-
         }
 
 
@@ -87,52 +84,54 @@ namespace MegaDesk
         public decimal CalcShipping(decimal shippingNum, decimal size)
         {
             decimal tempShip;
+            GetRushOrder();
 
             if (shippingNum == 3)
             {
                 if (size < 1000)
                 {
-                    tempShip = 60;
+                    tempShip = shippingArray[0, 0];
                 }
                 else if (size < 2001)
                 {
-                    tempShip = 70;
+                    tempShip = shippingArray[0, 1];
                 }
                 else
                 {
-                    tempShip = 80;
+                    tempShip = shippingArray[0, 2];
                 }
             } else if (shippingNum == 5)
             {
                 if (size < 1000)
                 {
-                    tempShip = 40;
+                    tempShip = shippingArray[1, 0];
                 }
                 else if (size < 2001)
                 {
-                    tempShip = 45;
+                    tempShip = shippingArray[1, 1];
                 }
                 else
                 {
-                    tempShip = 60;
+                    tempShip = shippingArray[1, 2];
                 }
             } else
             {
                 if (size < 1000)
                 {
-                    tempShip = 60;
+                    tempShip = shippingArray[2, 0];
                 }
                 else if (size < 2001)
                 {
-                    tempShip = 70;
+                    tempShip = shippingArray[2, 1];
                 }
                 else
                 {
-                    tempShip = 80;
+                    tempShip = shippingArray[2, 2];
                 }
             }
             return tempShip;
         }
+    
 
         public decimal GetMatCost(decimal matNum)
         {
