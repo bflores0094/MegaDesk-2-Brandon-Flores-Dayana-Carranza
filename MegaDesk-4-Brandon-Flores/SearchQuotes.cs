@@ -57,10 +57,6 @@ namespace MegaDesk
 
                 columns = line.Split(',');
                 quoteDt.Rows.Add(columns);
-
-
-
-
             }
             reader.Close();
             dataGridView2.DataSource = quoteDt;
