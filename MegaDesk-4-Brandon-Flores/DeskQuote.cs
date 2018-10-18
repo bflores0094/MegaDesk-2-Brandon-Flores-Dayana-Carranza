@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 
 namespace MegaDesk
@@ -27,8 +28,61 @@ namespace MegaDesk
             decimal materialCost = GetMatCost(Desk.materialNum);
             this.Cost = GetQuote(size, this.Shipping, materialCost);
             materialInt = Desk.materialNum;
+            
+        
+        }
+
+        private int[,] GetRushOrder()
+
+        {
+
+            int[,] shippingArray = new int[3, 3];
+
+            try
+
+            {
+
+                StreamReader reader = new StreamReader("rushOrderPrices.txt");
+
+                reader.Close();
+
+
+                while (reader.EndOfStream == false)
+                {
+
+                    for (int row = 0; row < 3; row++)
+
+                    {
+
+                        for (int col = 0; col < 3; col++)
+
+                        {
+
+                            string line = reader.ReadLine();
+
+                            shippingArray[row, col] = int.Parse(line);
+
+                        }
+                    }
+                }
+            }
+
+
+
+            catch (FileNotFoundException)
+
+            {
+            }
+
+            
+
+            return shippingArray;
 
         }
+
+
+
+       
 
         public decimal CalcShipping(decimal shippingNum, decimal size)
         {
