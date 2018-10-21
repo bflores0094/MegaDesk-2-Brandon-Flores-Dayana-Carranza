@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace MegaDesk
 {
@@ -27,12 +28,21 @@ namespace MegaDesk
 
         private void ViewAllQuotes_Load(object sender, EventArgs e)
         {
-            StreamReader reader = new StreamReader("quotes.txt");
+          //  StreamReader reader = new StreamReader("quotes.txt");
             DataTable quoteDt = new DataTable();
             string Date = "Date";
             string Name = "Name";
             string Quote = "Quote";
             string Material = "Material";
+            List<DeskQuote> quoteList = new List<DeskQuote>();
+
+            using (StreamReader file = File.OpenText("quotes.json"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                DeskQuote currDeskQuote = (DeskQuote)serializer.Deserialize(file, typeof(DeskQuote));
+                quoteList.Add(currDeskQuote);
+            }
+            
 
             quoteDt.Columns.Add(Date);
             quoteDt.Columns.Add(Name);
@@ -41,21 +51,44 @@ namespace MegaDesk
 
 
 
-            string[] columns;
-            while (reader.EndOfStream == false)
-            {
-                string line = reader.ReadLine();
-                
-                 columns = line.Split(',');
-                quoteDt.Rows.Add(columns);
-
-
-               
-
+           
+            for (int i = 0; i < quoteList.Count; i++)
+            { 
+                string matStr = GetMatStr(quoteList[i].materialInt);
+                quoteDt.Rows.Add(quoteList[i].Date, quoteList[i].Name,
+                                 quoteList[i].Cost, matStr);
             }
-            reader.Close();
+          //  reader.Close();
             dataGridView1.DataSource = quoteDt;
 
+        }
+
+        public string GetMatStr(decimal mat)
+        {
+                string tempMat;
+
+                if (mat == 1)
+                {
+                    tempMat = "Oak";
+                }
+                else if (mat == 2)
+                {
+                    tempMat = "Laminate";
+                }
+                else if (mat == 3)
+                {
+                    tempMat = "Pine";
+                }
+                else if (mat == 4)
+                {
+                    tempMat = "Rosewood";
+                }
+                else
+                {
+                    tempMat = "Veneer";
+                }
+                return tempMat;
+            
         }
     }
 }

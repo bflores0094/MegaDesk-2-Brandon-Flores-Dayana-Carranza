@@ -13,7 +13,7 @@ namespace MegaDesk
         public Desk Desk { get; set; }
         public decimal Cost { get; set; }
         public string Name { get; set; }
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
         public decimal Shipping { get; set; }
         const decimal BASE_PRICE = 200;
         public decimal materialInt;
@@ -29,7 +29,7 @@ namespace MegaDesk
         {
             this.Desk = Desk;
             this.Name = Name;
-            this.Date = DateTime.Now;
+            this.Date = DateTime.Now.ToString("d");
             decimal size = Desk.widthInput * Desk.heightInput;
             this.Shipping = CalcShipping(shippingNum, size);
             decimal materialCost = GetMatCost(Desk.materialNum);

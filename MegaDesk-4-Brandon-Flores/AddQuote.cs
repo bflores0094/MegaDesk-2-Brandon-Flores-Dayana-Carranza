@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using Newtonsoft.Json;
 
 
 namespace MegaDesk
 {
     public partial class AddQuote : Form
     {
+        
        
         public AddQuote()
         {
@@ -33,7 +35,6 @@ namespace MegaDesk
 
         private void Add_Click(object sender, EventArgs e)
         {
-           
 
             string strMaterial = MaterialInput.Text;
             decimal widthNum = WidthInput.Value;
@@ -42,9 +43,6 @@ namespace MegaDesk
             decimal shippingNum = Convert.ToDecimal(ShippingInput.Text);
             string custName = NameInput.Text;
             decimal materialNum;
-            StreamWriter writer;
-
-
 
             if (strMaterial == "oak")
             {
@@ -91,20 +89,18 @@ namespace MegaDesk
 
                 try
                 {
-
-
                     Desk newDesk = new Desk(widthNum, heightNum, drawerNum, materialNum);
 
                     DeskQuote newQuote = new DeskQuote(newDesk, custName, shippingNum);
-                    writer = new StreamWriter("quotes.txt", true);
-                    writer.Write(newQuote.Date.ToString("MM/dd/yyyy") + ", " +
-                        newQuote.Name + ", " + newQuote.Cost + ", " + strMaterial + "\n");
-                    writer.Close();
+
+                    using (StreamWriter file = File.AppendText("quotes.json"))
+                    {
+                        JsonSerializer serializer = new JsonSerializer();
+                        serializer.Serialize(file, newQuote);
+                    }
 
                     label5.Text = "Table quote created!";
                     label6.Text = "";
-
-
 
                 }
                 catch
@@ -121,6 +117,7 @@ namespace MegaDesk
 
 
         }
+
     }
 
 }
